@@ -6,10 +6,10 @@ RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf
 RUN sed -i -e "s/;\?daemonize\s*=\s*yes/daemonize = no/g" /etc/php/7.2/fpm/php-fpm.conf
 RUN echo "\nclear_env = no" >> /etc/php/7.2/fpm/pool.d/www.conf
 #COPY FILE
-COPY apps/. /var/www/html/
+COPY . /var/www/html/
 # Nginx config
 RUN rm /etc/nginx/sites-enabled/default
-ADD apps/pesbuk.conf /etc/nginx/sites-available/
+ADD pesbuk.conf /etc/nginx/sites-available/
 RUN ln -s /etc/nginx/sites-available/pesbuk.conf /etc/nginx/sites-enabled/pesbuk.conf
 
 RUN echo "exit 0" > /usr/sbin/policy-rc.d
